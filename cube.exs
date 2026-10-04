@@ -73,3 +73,16 @@ end
 def move(cube, :F_prime) do
   cube |> move(:F) |> move(:F) |> move(:F)
 end
+
+# Adding Scrambling & Movement Pipelines
+
+@moves [:U, :D, :L, :R, :F, :B, :F_prime, :U_prime]
+
+def apply_moves(cube, moves) when is_list(moves) do
+  Enum.reduce(moves, cube, fn m, acc -> move(acc,m) end)
+end
+
+def scramble(cube, length \\ 20) do
+  random_moves = Enum.map(1..length, fn _ -> Enum.random(@moves) end)
+  {apply_moves(cube, random_moves), random_moves}
+end
