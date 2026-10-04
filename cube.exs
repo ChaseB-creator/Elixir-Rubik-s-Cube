@@ -120,7 +120,7 @@ defmodule RubiksCube do
   end
 end
 
-# --- Execution ---
+# --- Example Execution ---
 cube = RubiksCube.new()
 IO.puts("Initial Solved State:")
 RubiksCube.render(cube)
