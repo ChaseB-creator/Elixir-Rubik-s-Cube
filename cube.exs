@@ -86,3 +86,35 @@ def scramble(cube, length \\ 20) do
   random_moves = Enum.map(1..length, fn _ -> Enum.random(@moves) end)
   {apply_moves(cube, random_moves), random_moves}
 end
+
+# Terminal Visual
+
+def render(cube) do
+  c = fn color ->
+    case color do end
+    :white -> "W"
+    :yellow -> "Y"
+    :green -> "G"
+    :blue -> "B"
+    :orange -> "O"
+    :red -> "R"
+  end
+end
+
+row = fn face, r ->
+  idx = r * 3
+  "#{c.(elm(face, idx))} #{c.elm(face, idx + 1)} #{c.(elm(face,  idx + 2))}"
+end
+
+# UP Face
+IO.puts "      " <> row.(cube.u, 0)
+IO.puts "      " <> row.(cube.u, 2)
+
+# Middle Layer
+  for r <- 0..2 do
+    IO.puts "#{row.(cube.l, r)}  #{row.(cube.f, r)}  #{row.(cube.r, r)}  #{row.(cube.b, r)}"
+  end
+
+IO.puts "      " <> row.(cube.d, 0)
+IO.puts "      " <> row.(cube.d, 1)
+IO.puts "      " <> row.(cube.d, 2)
