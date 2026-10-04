@@ -50,3 +50,26 @@ def rotate_face_ccw(face) do
   |> rotate_face_cw()
   |> rotate_face_cw()
 end
+
+# Defining Face Turns (Core Logic Functionality)
+
+def move(cube, :F) do
+
+  {u0, u1, u2, u3, u4, u5, u6, u7, u8} = u
+  {d0, d1, d2, d3, d4, d5, d6, d7, d8} = d
+  {l0, l1, l2, l3, l4, l5, l6, l7, l8} = l
+  {r0, r1, r2, r3, r4, r5, r6, r7, r8} = r
+
+  %{cube |
+  f: rotate_face_cw(f),
+  u: {u0, u1, u2, u3, u4, u5, l8, l5, l2},
+  r: {u6, r1, r2, u7, r4, r5, u8, r7, r8},
+  d: {r6, r3, r0, d3, d4, d5, d6, d7, d8},
+  l: {l0, l1, d0, l3, l4, d1, l6, l7, d2}
+}
+
+end
+
+def move(cube, :F_prime) do
+  cube |> move(:F) |> move(:F) |> move(:F)
+end
