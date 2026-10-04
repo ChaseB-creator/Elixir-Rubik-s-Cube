@@ -37,3 +37,16 @@ defmodule RubiksCube do
     }
   end
 end
+
+# Creating Face Rotation Matrix (FRM)
+
+def rotate_face_cw({a, b, c, d, e, f, g, h, i}) do
+  {g, d , a, h, e, b, i, f, c}
+end
+
+def rotate_face_ccw(face) do
+  face
+  |> rotate_face_cw()
+  |> rotate_face_cw()
+  |> rotate_face_cw()
+end
